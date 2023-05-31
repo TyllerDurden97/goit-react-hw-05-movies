@@ -2,41 +2,47 @@ import { React, useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { Loader } from 'components/Loader/Loader';
 
-import fetchMovieDetails from "../../services/fetchDetails";
+import fetchMovieCast from "../../services/fetchCast";
 
-const MovieDetails = () => {
+const Cast = () => {
    const { movieId } = useParams();
-   const [movDetails, setMovDetails] = useState({});
+   const [movCast, setMovCast] = useState({});
    const [status, setStatus] = useState('idle');
    const [error, setError] = useState(null);
 
    useEffect(() => {
       setStatus('pending');
       (async () => {
-         await fetchMovieDetails(movieId)
+         await fetchMovieCast(movieId)
             .then(movie => {
-               setMovDetails(movie.data);
+               setMovCast(movie.data.cast);
                setStatus('idle');
-               // console.log(movie.data.genres); 
+               console.log(movie.data.cast); 
 
             })
             .catch(error => {
                setError(error);
             });
       })()
-   }, []);      
-  
-   // const { overview, poster_path, title, release_date, vote_average } = movDetails;
-   // const yearRelease = release_date.slice(0, 3);
-   // console.log(movDetails);
-  
-   if(movDetails.id)
-   return (
+   }, []);
+
+   if (movCast[0])
+      return (
       <>
          {status === 'pending' && <Loader/> }
-         {error && <div>Something wents wrong. Try again.</div>}
+            {error && <div>Something wents wrong. Try again.</div>}
+            {movCast.map(({ character, name, profile_path, id }) => {
+               return <div key={id}>
+                  <img
+                     // className={css.imageMovDetails}
+                     src={`https://image.tmdb.org/t/p/w500${profile_path}`} alt={name} />
+                  <span>{`${name}`}</span> <br />
+                  <span>Character: {`${character}`}</span> <br />
+                  </div>
+                    
+            })}
 
-         <div>
+         {/* <div>
             <img
                // className={css.imageMovDetails}
                src={`https://image.tmdb.org/t/p/w500${movDetails.poster_path}`} alt={movDetails.title} />
@@ -61,19 +67,9 @@ const MovieDetails = () => {
                   
                </li>
             </ul>
-         </div>
-         <h2>Additional information</h2>
-         <ul>
-            <li>
-               <Link to='cast'>Cast</Link>
-            </li>
-            <li>
-               <Link to='reviews'>Reviews</Link>
-            </li>
-         </ul>
-         <Outlet/>
-      </>
-   );
-}; 
+         </div> */}
+       
+      </>      )
+};
 
-export default MovieDetails;
+export default Cast;
