@@ -4,9 +4,9 @@ import axios from 'axios';
    const BASE_URL = 'https://api.themoviedb.org/3/';
 
 
-async function fetchMovieCast (movieId) {
+async function fetchMovieReviews (movieId) {
    try {
-    const data = await axios.get(`${BASE_URL}movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`)
+    const data = await axios.get(`${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US`)
 
       return data;
  }   
@@ -17,8 +17,10 @@ async function fetchMovieCast (movieId) {
 };
 
 // fetchMovieDetails(603692);
-                  // console.log(fetchMovieCast(603692));
+                  // console.log(fetchMovieReviews(603692));
 
 
-export default fetchMovieCast;
+export default fetchMovieReviews;
 
+
+// https://api.themoviedb.org/3/movie/{movie_id}/reviews

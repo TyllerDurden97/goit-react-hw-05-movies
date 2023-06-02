@@ -32,12 +32,20 @@ const Cast = () => {
          {status === 'pending' && <Loader/> }
             {error && <div>Something wents wrong. Try again.</div>}
             {movCast.map(({ character, name, profile_path, id }) => {
-               return <div key={id}>
-                  <img
-                     // className={css.imageMovDetails}
-                     src={`https://image.tmdb.org/t/p/w500${profile_path}`} alt={name} />
-                  <span>{`${name}`}</span> <br />
+               if (profile_path) {
+                  return <div key={id}>
+                     <img
+                        // className={css.imageMovDetails}
+                        src={`https://image.tmdb.org/t/p/w500${profile_path}`} alt={name} /> <br />
+                     <span>{`${name}`}</span> <br />
+                     <span>Character: {`${character}`}</span> <br />
+                  </div>
+               }
+               return  <div key={id}>
+                     <div>---No photo---</div> <br />
+                     <span>{`${name}`}</span> <br />
                   <span>Character: {`${character}`}</span> <br />
+                  
                   </div>
                     
             })}

@@ -15,7 +15,7 @@ const Home = () => {
          setStatus('pending');
       fetchApi()
          .then(movies => {
-            console.log(movies.data.results); 
+            // console.log(movies.data.results); 
             setPopMovies(movies.data.results);
             setStatus('idle');
       })

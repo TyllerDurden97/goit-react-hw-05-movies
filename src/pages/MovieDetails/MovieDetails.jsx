@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { Loader } from 'components/Loader/Loader';
-
 import fetchMovieDetails from "../../services/fetchDetails";
 
 const MovieDetails = () => {
@@ -17,14 +16,14 @@ const MovieDetails = () => {
             .then(movie => {
                setMovDetails(movie.data);
                setStatus('idle');
-               // console.log(movie.data.genres); 
+               // console.log(movie.data); 
 
             })
             .catch(error => {
                setError(error);
             });
       })()
-   }, []);      
+   }, [movieId]);      
   
    // const { overview, poster_path, title, release_date, vote_average } = movDetails;
    // const yearRelease = release_date.slice(0, 3);
@@ -45,7 +44,7 @@ const MovieDetails = () => {
                   <p>{`${movDetails.title} (${movDetails.release_date.slice(0,4)})`}</p>                  
                </li>
                <li>
-                  <p> User Score: {`(${movDetails.vote_average})`}</p>                  
+                  <p> User Score: {`${Math.round(movDetails.vote_average*10)}%`}</p>                  
                </li>
                <li>
                   <p> Overview: <br />
