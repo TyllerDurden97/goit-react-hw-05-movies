@@ -21,7 +21,7 @@ const Home = () => {
          .catch(error => {
             setError(error);
          });
-   }, []);
+   }, [popMovies.length]);
 
    return (
       <>
