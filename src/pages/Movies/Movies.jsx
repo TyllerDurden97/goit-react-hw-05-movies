@@ -45,20 +45,20 @@ const Movies = () => {
          onSubmit={handleSubmitSearch} 
          className={css.movieForm}   
       >
-          <input
+         <input
             name="input"            
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search movies"
             className={css.movieInput}
-             />
-             <button
+         />
+         <button
             type="submit"
             className={css.movieFormBtn}
                > Search
          </button>        
-         </form>
+      </form>
          {status === 'pending' && <Loader />}
          {status === 'rejected' && <div>There are no movies with this title.</div> }
    
