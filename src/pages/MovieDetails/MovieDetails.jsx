@@ -1,5 +1,5 @@
 import { React, useEffect, useState, useRef, Suspense } from "react";
-import { Link, Outlet, useParams, useLocation } from "react-router-dom";
+import { Link, Outlet, useParams, useLocation, Navigate } from "react-router-dom";
 import { Loader } from 'components/Loader/Loader';
 import fetchMovieDetails from "../../services/fetchDetails";
 import css from 'pages/MovieDetails/MovieDetails.module.css';
@@ -30,7 +30,7 @@ import css from 'pages/MovieDetails/MovieDetails.module.css';
    return (
       <>
          {status === 'pending' && <Loader/> }
-         {error && <div>Something wents wrong. Try again.</div>}
+         {error && <Navigate to={goBackLocationRef.current} />}
          {<Link to={goBackLocationRef.current}
             className={css.goBackLink}
          >Go back</Link>}

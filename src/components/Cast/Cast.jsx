@@ -1,5 +1,5 @@
-import { React, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { React, useEffect, useState, useRef } from "react";
+import { Navigate, useParams, useLocation } from "react-router-dom";
 import { Loader } from 'components/Loader/Loader';
 import css from 'components/Cast/Cast.module.css';
 import fetchMovieCast from "../../services/fetchCast";
@@ -9,6 +9,9 @@ const Cast = () => {
    const [movCast, setMovCast] = useState({});
    const [status, setStatus] = useState('idle');
    const [error, setError] = useState(null);
+   const location = useLocation();
+      const goBackLocationRef = useRef(location.state?.from ?? '/');
+
 
    useEffect(() => {
       setStatus('pending');
@@ -28,7 +31,7 @@ const Cast = () => {
       return (
       <>
          {status === 'pending' && <Loader/> }
-            {error && <div>Something wents wrong. Try again.</div>}
+            {error && <Navigate to={goBackLocationRef.current} />}
             {movCast.map(({ character, name, profile_path, id }) => {
                if (profile_path) {
                   return <div

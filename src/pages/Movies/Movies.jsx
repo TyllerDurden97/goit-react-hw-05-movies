@@ -1,8 +1,9 @@
 import { React, useEffect, useState } from "react";
-import { Link, useSearchParams, useLocation } from "react-router-dom";
+import { Link, useSearchParams, useLocation, Navigate } from "react-router-dom";
 import fetchSearchMov from "../../services/fetchSearchMov";
 import { Loader } from 'components/Loader/Loader';
 import css from 'pages/Movies/Movie.module.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const Movies = () => {
    const [movies, setMovies] = useState([]);
@@ -10,6 +11,8 @@ const Movies = () => {
    const [searchParams, setSearchParams] = useSearchParams();
    const query = searchParams.get('query') ?? '';
    const location = useLocation();
+   const [error, setError] = useState(null);
+
    
    const handleSubmitSearch = event => {
       event.preventDefault();
@@ -32,7 +35,11 @@ const Movies = () => {
                   setStatus('idle');
                })
                .catch(error => {
+               setError(error);
                   console.log(error)
+                  Notify.info("404 page not found".toUpperCase());
+                  setStatus('idle');
+                  setMovies([]);
                });
          })()
       };
@@ -41,6 +48,8 @@ const Movies = () => {
    
    return (
       <>
+      {error && <Navigate to={'/movies'} />}
+   
       <form
          onSubmit={handleSubmitSearch} 
          className={css.movieForm}   
@@ -61,7 +70,6 @@ const Movies = () => {
       </form>
          {status === 'pending' && <Loader />}
          {status === 'rejected' && <div>There are no movies with this title.</div> }
-   
       <ol className={css.moviesList}>
             {movies.map(({ id, title}) => {
                return <li key={id}>
