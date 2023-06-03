@@ -13,11 +13,11 @@ const Movies = () => {
    const location = useLocation();
    const [error, setError] = useState(null);
 
-   
+
    const handleSubmitSearch = event => {
       event.preventDefault();
       setSearchParams({ query: event.target.elements.input.value });
-      event.target.elements.input.value = '';
+      // event.target.elements.input.value = '';
    };
 
    useEffect(() => {
@@ -29,13 +29,13 @@ const Movies = () => {
                   if (movie.data.results.length === 0) {
                      setStatus('rejected')
                      setMovies([])
-                     return; 
+                     return;
                   };
                   setMovies(movie.data.results);
                   setStatus('idle');
                })
                .catch(error => {
-               setError(error);
+                  setError(error);
                   console.log(error)
                   Notify.info("404 page not found".toUpperCase());
                   setStatus('idle');
@@ -43,35 +43,35 @@ const Movies = () => {
                });
          })()
       };
-      }, [query]);
+   }, [query]);
 
-   
+
    return (
       <>
-      {error && <Navigate to={'/movies'} />}
-   
-      <form
-         onSubmit={handleSubmitSearch} 
-         className={css.movieForm}   
-      >
-         <input
-            name="input"            
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search movies"
-            className={css.movieInput}
-         />
-         <button
-            type="submit"
-            className={css.movieFormBtn}
-               > Search
-         </button>        
-      </form>
+         {error && <Navigate to={'/movies'} />}
+
+         <form
+            onSubmit={handleSubmitSearch}
+            className={css.movieForm}
+         >
+            <input
+               name="input"
+               type="text"
+               autoComplete="off"
+               autoFocus
+               placeholder="Search movies"
+               className={css.movieInput}
+            />
+            <button
+               type="submit"
+               className={css.movieFormBtn}
+            > Search
+            </button>
+         </form>
          {status === 'pending' && <Loader />}
-         {status === 'rejected' && <div>There are no movies with this title.</div> }
-      <ol className={css.moviesList}>
-            {movies.map(({ id, title}) => {
+         {status === 'rejected' && <div>There are no movies with this title.</div>}
+         <ol className={css.moviesList}>
+            {movies.map(({ id, title }) => {
                return <li key={id}>
                   <Link to={`${id}`}
                      state={{ from: location }}
@@ -79,14 +79,14 @@ const Movies = () => {
                   >
                      {title}
                   </Link>
-                  </li> 
+               </li>
             })
-            }     
+            }
          </ol>
 
       </>
-    ) 
-   };
+   )
+};
 
 export default Movies;
 
