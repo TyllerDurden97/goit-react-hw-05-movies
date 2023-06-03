@@ -1,0 +1,16 @@
+.noReviews {
+  padding-left: 50px;
+  margin-bottom: 50px;
+  font-weight: 600;
+}
+.reviewsList {
+  padding: 0 50px;
+  list-style: none;
+}
+.reviewsListItem {
+  margin-bottom: 25px;
+}
+.reviewAuthorName {
+  margin-bottom: 10px;
+  font-weight: 600;
+}

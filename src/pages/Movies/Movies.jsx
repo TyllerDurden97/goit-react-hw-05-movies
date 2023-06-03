@@ -1,32 +1,19 @@
 import { React, useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 import fetchSearchMov from "../../services/fetchSearchMov";
 import { Loader } from 'components/Loader/Loader';
-
+import css from 'pages/Movies/Movie.module.css';
 
 const Movies = () => {
-   const [searchRequest, setSearchRequest] = useState('');
    const [movies, setMovies] = useState([]);
    const [status, setStatus] = useState('idle');
-   // const [error, setError] = useState(null);
    const [searchParams, setSearchParams] = useSearchParams();
    const query = searchParams.get('query') ?? '';
-
-
-   // const handleInputChange = event => {   
-   //   setSearchRequest(event.currentTarget.value.toLowerCase());
-   // };
+   const location = useLocation();
    
    const handleSubmitSearch = event => {
       event.preventDefault();
-      // console.log(event.target.elements.input.value);
       setSearchParams({ query: event.target.elements.input.value });
-
-      // if (searchRequest.trim() === '') {
-      //    // Notiflix.Notify.info("Please type search request".toUpperCase());
-      //    return;
-      // };
-      // setSearchRequest('');
       event.target.elements.input.value = '';
    };
 
@@ -43,7 +30,6 @@ const Movies = () => {
                   };
                   setMovies(movie.data.results);
                   setStatus('idle');
-                  console.log(movie.data.results);
                })
                .catch(error => {
                   console.log(error)
@@ -56,44 +42,43 @@ const Movies = () => {
    return (
       <>
       <form
-         // className={css.searchForm}
-         onSubmit={handleSubmitSearch}       
+         onSubmit={handleSubmitSearch} 
+         className={css.movieForm}   
       >
           <input
-            // className={css.searchFormInput}
             name="input"            
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search movies"
-            // onChange={handleInputChange}            
+            className={css.movieInput}
              />
              <button
-                  type="submit"
-            // className={css.searchFormButton}
+            type="submit"
+            className={css.movieFormBtn}
                > Search
          </button>        
          </form>
          {status === 'pending' && <Loader />}
          {status === 'rejected' && <div>There are no movies with this title.</div> }
-         {/* {error && <div>Something wents wrong. Try again.</div>} */}
    
-      <ul>
+      <ol className={css.moviesList}>
             {movies.map(({ id, title}) => {
                return <li key={id}>
-                  <Link to={`${id}`}>
+                  <Link to={`${id}`}
+                     state={{ from: location }}
+                     className={css.movieLink}
+                  >
                      {title}
                   </Link>
                   </li> 
             })
             }     
-         </ul>
+         </ol>
 
       </>
-    )
-      
-   
-};
+    ) 
+   };
 
 export default Movies;
 

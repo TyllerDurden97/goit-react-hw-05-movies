@@ -1,0 +1,32 @@
+.layoutHeader {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  opacity: 0.9;
+  background-color: #c2cbee;
+  /* margin-bottom: 10px; */
+}
+
+.layoutLink {
+  width: 5px;
+  text-decoration: none;
+  color: rgb(2, 1, 15);
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 5px;
+  /* -webkit-text-stroke: 0.3px rgb(242, 242, 231); */
+  opacity: 1;
+}
+.layoutLink:hover,
+.layoutLink:active {
+  /* -webkit-text-stroke: 0.5px rgb(243, 243, 238); */
+  color: rgb(40, 26, 230);
+}
+
+.layoutMain {
+  margin-top: 45px;
+}
+.layoutNav {
+  padding: 5px 35px;
+}

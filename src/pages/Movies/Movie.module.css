@@ -1,0 +1,58 @@
+.movieForm {
+  padding: 20px 50px;
+  display: relative;
+  /* align-items: center; */
+}
+
+.movieInput {
+  display: relative;
+
+  width: 200px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.535);
+  border-radius: 5px;
+  background-color: hsla(244, 26%, 89%, 0.729);
+  margin-top: 5px;
+  overflow: hidden;
+  color: #074086;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1.1px;
+  -webkit-box-shadow: 7px 9px 14px 0px rgba(0, 0, 0, 0.31);
+  -moz-box-shadow: 7px 9px 14px 0px rgba(0, 0, 0, 0.31);
+  box-shadow: 7px 9px 14px 0px rgba(0, 0, 0, 0.31);
+}
+
+.movieInput:focus {
+  outline: none;
+  background-color: #dfdfe7;
+}
+
+.movieFormBtn {
+  display: absolute;
+  width: 60px;
+  height: 32px;
+  background-color: #3b81d690;
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.7px;
+  color: #0a3160e5;
+  cursor: pointer;
+  -webkit-box-shadow: 7px 9px 14px 0px rgba(0, 0, 0, 0.31);
+  -moz-box-shadow: 7px 9px 14px 0px rgba(0, 0, 0, 0.31);
+  box-shadow: 7px 9px 14px 0px rgba(0, 0, 0, 0.31);
+}
+
+.moviesList {
+  padding-left: 65px;
+}
+.movieLink {
+  text-decoration: none;
+  padding-left: 5px;
+}
+.movieLink:hover {
+  text-decoration: none;
+  color: rgb(0, 136, 255);
+}

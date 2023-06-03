@@ -1,0 +1,18 @@
+.homeTitle {
+  font-size: 25px;
+  padding-left: 50px;
+  margin-bottom: 20px;
+  color: rgba(60, 57, 57, 0.854);
+}
+
+.homeMovieList {
+  padding-left: 50px;
+}
+.homeMovieLink {
+  text-decoration: none;
+  padding-left: 5px;
+}
+.homeMovieLink:hover {
+  text-decoration: none;
+  color: rgb(0, 136, 255);
+}
