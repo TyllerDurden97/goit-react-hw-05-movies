@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Link, Navigate, useLocation, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { Loader } from 'components/Loader/Loader';
 import fetchApi from "../../services/fetchTrand";
 import css from 'pages/Home/Home.module.css';
