@@ -11,9 +11,6 @@ const Home = () => {
    const [status, setStatus] = useState('idle');
    const [error, setError] = useState(null);
    const location = useLocation();
-   const [searchParams, setSearchParams] = useSearchParams();
-               console.log(searchParams)
-
    
    useEffect(() => { 
       if (popMovies.length === 0)
@@ -27,7 +24,6 @@ const Home = () => {
             setError(error);
             console.log(error)
             Notify.info("404 page not found".toUpperCase());
-            // setSearchParams({})
          });
    }, [popMovies.length]);
 
